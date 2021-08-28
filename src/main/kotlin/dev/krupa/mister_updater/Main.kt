@@ -1,10 +1,10 @@
-package dev.krupa
+package dev.krupa.mister_updater
 
 import dev.krupa.mister_updater.github.StandardCore
 import org.kohsuke.github.GitHub
 import java.nio.file.Path
 
-fun main(args: Array<String>) {
+fun main() {
     val client = GitHub.connect()
 
     val cores = listOf(
