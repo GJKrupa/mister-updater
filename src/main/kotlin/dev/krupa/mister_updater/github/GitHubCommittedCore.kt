@@ -16,11 +16,10 @@ open class GitHubCommittedCore(
     override fun download(location: Path) {
         println("Reading from $this")
         val repo = github.getRepository(repository)
-        val items = repo.getDirectoryContent(path, repo.defaultBranch)
+        val last = repo.getDirectoryContent(path, repo.defaultBranch)
             .filter { filter.matches(it.name) }
             .toMutableList()
-        val summary = items.sortedBy { it.name }
-        val last = summary.last()
+            .maxByOrNull { it.name }!!
         val output = location.resolve(name)
         var tree = repo.getCommit(repo.defaultBranch).tree
 
